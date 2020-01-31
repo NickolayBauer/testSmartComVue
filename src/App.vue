@@ -30,7 +30,9 @@
                           <i class="fas fa-bars"></i>
                           <span>Home</span>
                         </router-link>
+                        /
                         <router-link :to="{ name: 'Dashboard'}">Dashboard</router-link>
+                        /
                         <router-link
                             :to="{ name: 'DataTable', params:{'table_name':'sample table'}}"
                         >Sample data table</router-link>
