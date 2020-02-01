@@ -8,37 +8,66 @@
         <Modal v-if="showModalEdit" @send="editItem" @close="showModalEdit = false">
             <h3 slot="header">Edit Item</h3>
         </Modal>
-        <table class="table">
-            <thead>
-                <tr>
-                    <th scope="col">id</th>
-                    <th scope="col">Date</th>
-                    <th scope="col">Title</th>
-                    <th scope="col">Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr v-for="item in getItems" :key="item.id">
-                    <th scope="row">{{item.id}}</th>
-                    <td>{{item.date}}</td>
-                    <td>{{item.title}}</td>
-                    <td>
-                        <button
-                            type="button"
-                            class="btn btn-primary mr-2"
-                            @click="showModalEdit = true, editableItem = item"
-                            data-toggle="modal"
-                            data-target="#exampleModalCenter"
-                        >Edit</button>
-                        <button
-                            type="button"
-                            class="btn btn-danger"
-                            @click="deleteItem(item.id)"
-                        >Delete</button>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+        <div class="table-container">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">id</th>
+                        <th scope="col">Date</th>
+                        <th scope="col">Title</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="item in pagesOnTable" :key="item.id">
+                        <th scope="row">{{item.id}}</th>
+                        <td>{{item.date}}</td>
+                        <td>{{item.title}}</td>
+                        <td>
+                            <button
+                                type="button"
+                                class="btn btn-primary mr-2"
+                                @click="showModalEdit = true, editableItem = item"
+                                data-toggle="modal"
+                                data-target="#exampleModalCenter"
+                            >Edit</button>
+                            <button
+                                type="button"
+                                class="btn btn-danger"
+                                @click="deleteItem(item.id)"
+                            >Delete</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-lg-6 col-md-8 col-12 mx-auto d-flex justify-content-center mt-3 py-1">
+            <div class="d-inline">
+                <button
+                    class="btn btn-primary toPage"
+                    :disabled="!(toPage-elemsOnPage >= 0)"
+                    @click="toPage-=elemsOnPage"
+                >
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+
+                <button
+                    class="btn toPage"
+                    :class="[pageNumber == toPage/elemsOnPage+1 ? 'btn-info' : 'btn-secondary']"
+                    v-for="pageNumber in allowedPages"
+                    :key="pageNumber"
+                    @click="toPage = (elemsOnPage*(pageNumber-1))"
+                >{{pageNumber}}</button>
+
+                <button
+                    class="btn btn-primary toPage"
+                    :disabled="!(toPage+elemsOnPage < getItems.length)"
+                    @click="toPage+=elemsOnPage"
+                >
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+        </div>
     </div>
 </template>
 <script>
@@ -52,7 +81,10 @@ export default {
         return {
             showModalAdd: false,
             showModalEdit: false,
-            editableItem: {}
+            editableItem: {},
+            toPage: 0,
+            elemsOnPage: 5,
+            numPage: 1
         };
     },
     mounted() {
@@ -101,6 +133,24 @@ export default {
     computed: {
         getItems() {
             return this.sortById(this.$store.getters.getItems);
+        },
+        pagesOnTable() {
+            return this.getItems.slice(
+                this.toPage * this.numPage,
+                this.toPage + this.elemsOnPage
+            );
+        },
+        allowedPages() {
+            let allPages = Math.ceil(this.getItems.length / this.elemsOnPage);
+            let start = this.toPage / this.elemsOnPage - 1;
+            let end = this.toPage / this.elemsOnPage + 3;
+            let arr = [];
+            for (let i = start; i <= end; i++) {
+                if (i <= allPages && i > 0) {
+                    arr.push(i);
+                }
+            }
+            return arr;
         }
     }
 };

@@ -1,9 +1,30 @@
 @import "var";
 
+
 body {
     min-width: 320px;
     width: auto !important;
     width: 320px;
+    overflow: hidden;
+}
+
+.table-container {
+    border: 2px solid $ui-blue;
+    height: 65vh;
+    overflow: auto;
+
+    &::-webkit-scrollbar {
+        width: 5px;
+    }
+
+    &::-webkit-scrollbar-track {
+        border-radius: 10px;
+        background-color: $ui-white;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background-color: $ui-dark-blue;
+    }
 }
 
 .check {
@@ -21,7 +42,7 @@ body {
 }
 
 .left-sidebar {
-    z-index: 99999;
+    z-index: 9998;
     width: 20%;
     background-color: $ui-blue;
     position: relative;
@@ -74,12 +95,12 @@ body {
 
 .main {
     flex: 1;
-    overflow: auto;
 }
 
 .main_header,
 .left-sidebar__header {
-    height: 70px;
+    height: 10vh;
+    min-height: 70px;
     display: flex;
     align-items: center;
 }
@@ -100,7 +121,8 @@ body {
 }
 
 .main_content {
-    padding: $main-gap;
+    padding: $main-gap $main-gap 0 $main-gap;
+    overflow: auto;
     height: 90vh;
 }
 
@@ -118,4 +140,10 @@ body {
 .graph-dash {
     width: 40vw;
     min-height: 40vw;
+}
+
+.toPage {
+    height: 40px;
+    width: 40px;
+    margin: 0 $main-gap*0.25 0 $main-gap*0.25
 }

@@ -1,7 +1,7 @@
 <template>
     <div id="app">
         <div class="content">
-            <aside class="left-sidebar" v-if="showSideBar">
+            <aside class="left-sidebar" :class="{'mobile-sidebar' :showSideBar}">
                 <div class="left-sidebar__header">
                     <router-link class="left-sidebar__logo" tag="span" :to="{ name: 'Home'}">
                         <i class="far fa-square fa-2x"></i>
@@ -24,7 +24,7 @@
                     </router-link>
                 </div>
             </aside>
-            <aside class="content-mask" v-if="showSideBar" @click="showSideBar = !showSideBar">
+            <aside class="content-mask" v-if="!showSideBar" @click="showSideBar = !showSideBar">
             </aside>
             <main class="main">
                 <div class="main_header">
