@@ -47,13 +47,16 @@
                     <span class="input-group-text" id="el-input">el:</span>
                 </div>
                 <input
-                    v-model="compElemsOnPage"
+                    v-model.number="compElemsOnPage"
                     type="number"
+                    min="1"
+                    step="1"
                     class="form-control"
+                    oninput="validity.valid||(value='');"
                     aria-describedby="el-input"
                 />
             </div>
-            <div class="col-md-6 col-12 d-flex justify-content-center">
+            <div class="col-lg-6 col-md col-12 d-flex justify-content-center">
                 <div>
                     <button
                         class="btn btn-primary toPage"
@@ -89,8 +92,11 @@
                     <span class="input-group-text" id="page-input">page:</span>
                 </div>
                 <input
-                    v-model="compCurPage"
+                    v-model.number="compCurPage"
                     type="number"
+                    min="1"
+                    step="1"
+                    oninput="validity.valid||(value='');"
                     class="form-control"
                     aria-describedby="page-input"
                 />
@@ -197,7 +203,7 @@ export default {
             let end = this.pageElems + 3;
             let arr = [];
             for (let i = start; i <= end; i++) {
-                if (i <= allPages && i > 0) {
+                if (i > 0 && i <= allPages) {
                     arr.push(i);
                 }
             }

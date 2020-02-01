@@ -13,6 +13,8 @@
                         <input
                             v-model="title"
                             type="text"
+                            @input="$v.title.$touch"
+                            :class="{'is-invalid': $v.title.$error}"
                             class="form-control"
                             aria-describedby="input-modal"
                         />
@@ -20,18 +22,24 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" @click="$emit('close')">close</button>
-                    <button type="button" class="btn btn-success" @click="$emit('send', title)">save</button>
+                    <button type="button" class="btn btn-success" :disabled="$v.$invalid" @click="$emit('send', title)">save</button>
                 </div>
             </div>
         </div>
     </div>
 </template>
 <script>
+import { required } from "vuelidate/lib/validators";
 export default {
     data() {
         return {
             title: ""
         };
+    },
+    validations: {
+        title: {
+            required
+        }
     }
 };
 </script>
@@ -54,7 +62,7 @@ export default {
 
 .modal-container {
     width: 400px;
-    max-width:90vw;
+    max-width: 90vw;
     margin: 0px auto;
     padding: 20px 30px;
     background-color: #fff;
