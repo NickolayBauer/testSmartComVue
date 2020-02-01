@@ -2,11 +2,13 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 import VueAxios from '@/axios'
 
+
 Vue.use(Vuex);
 
 export const store = new Vuex.Store({
     state: {
         items: [],
+        tables: []
     },
     getters: {
         getItems: state => {
@@ -27,7 +29,7 @@ export const store = new Vuex.Store({
         editItem: (state, newItem) => {
             let index = state.items.findIndex(item => item.id == newItem.id)
             state.items.splice(index, 1, newItem)
-        }
+        },
     },
     actions: {
         getItems: async (context) => {
@@ -51,6 +53,6 @@ export const store = new Vuex.Store({
                 data
             } = await VueAxios.put(`items/${item.id}`, item)
             context.commit('editItem', data)
-        }
+        },
     },
 });

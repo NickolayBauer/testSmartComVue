@@ -1,6 +1,10 @@
 @import "var";
 
-
+body {
+    min-width: 320px;
+    width: auto !important;
+    width: 320px;
+}
 
 .check {
     border: 1px solid red;
@@ -11,9 +15,17 @@
     display: flex;
 }
 
+.left-sidebar__close,
+.content_mask {
+    display: none;
+}
+
 .left-sidebar {
+    z-index: 99999;
     width: 20%;
     background-color: $ui-blue;
+    position: relative;
+
 
 
 
@@ -67,7 +79,7 @@
 
 .main_header,
 .left-sidebar__header {
-    height: 10vh;
+    height: 70px;
     display: flex;
     align-items: center;
 }
@@ -89,16 +101,21 @@
 
 .main_content {
     padding: $main-gap;
-    height:90vh;
+    height: 90vh;
 }
 
-.msg-page{
+.msg-page {
     display: flex;
     height: 100%;
     justify-content: center;
     align-items: center;
 
-    .msg-page__text{
+    .msg-page__text {
         text-align: center;
     }
+}
+
+.graph-dash {
+    width: 40vw;
+    min-height: 40vw;
 }

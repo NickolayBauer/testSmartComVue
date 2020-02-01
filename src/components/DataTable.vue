@@ -59,9 +59,19 @@ export default {
         this.$store.dispatch("getItems");
     },
     methods: {
+        DataTime() {
+            let today = new Date();
+            let d = `${today.getDate()}/`;
+            let mo = `${today.getMonth()}/`;
+            let y = `${today.getFullYear()}  `;
+            let h = `${today.getHours()}`.padStart(2, "0");
+            let mi = `${today.getMinutes()}`.padStart(2, "0");
+            let s = `${today.getSeconds()}`.padStart(2, "0");
+            return d + mo + y + h + ":" + mi + ":" + s;
+        },
         addItem(title) {
             let item = {
-                date: new Date(),
+                date: this.DataTime(),
                 title: title
             };
             this.$store.dispatch("addItem", item);
@@ -71,13 +81,13 @@ export default {
         editItem(title) {
             let item = {
                 id: this.editableItem.id,
-                date: new Date(),
+                date: this.DataTime(),
                 title: title
             };
             this.title = "";
             this.editableItem = {};
             this.$store.dispatch("editItem", item);
-            this.showModalEdit = false
+            this.showModalEdit = false;
         },
         deleteItem(item_id) {
             this.$store.dispatch("deleteItem", item_id);

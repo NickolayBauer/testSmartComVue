@@ -45,7 +45,6 @@ export default {
     height: 100%;
     background-color: rgba(0, 0, 0, 0.5);
     display: table;
-    transition: opacity 0.3s ease;
 }
 
 .modal-wrapper {
@@ -55,6 +54,7 @@ export default {
 
 .modal-container {
     width: 400px;
+    max-width:90vw;
     margin: 0px auto;
     padding: 20px 30px;
     background-color: #fff;

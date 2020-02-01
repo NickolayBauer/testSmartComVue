@@ -1,0 +1,56 @@
+@import "var";
+
+@media screen and (max-width: 762px) {
+    .content-mask {
+        position: fixed;
+        z-index: 9998;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        display: table;
+        transition: opacity 0.3s ease;
+    }
+
+    .left-sidebar {
+        position: fixed;
+        top: 0px;
+        left: 0px;
+        height: 100%;
+        width: 60%;
+
+        .left-sidebar__close {
+            display: block;
+            color: $ui-white;
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
+    }
+
+    .graph-dash {
+        width: 60vw;
+        min-height: 60vw;
+    }
+}
+
+
+@media screen and (max-width: 320px) {
+    .left-sidebar {
+        position: fixed;
+        top: 0px;
+        left: 0px;
+        height: 100%;
+        width: 75%;
+    }
+
+    .graph-dash {
+        width: 75vw;
+        min-height: 75vw;
+    }
+}
+
+//762px | md-sm
+//992px | lg-md
+//320px | sm

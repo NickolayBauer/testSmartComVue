@@ -8,6 +8,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap'
 import '@/styles/var.scss'
 import '@/styles/main.scss'
+import '@/styles/media.scss'
 
 window.$ = window.jQuery = require('jquery');
 Vue.config.productionTip = false
