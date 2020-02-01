@@ -170,7 +170,7 @@ export default {
         },
         compCurPage: {
             get() {
-                return this.toPage / this.elemsOnPage + 1;
+                return Math.floor(this.toPage / this.elemsOnPage) + 1;
             },
             set(data) {
                 if (
@@ -193,8 +193,8 @@ export default {
         },
         allowedPages() {
             let allPages = Math.ceil(this.getItems.length / this.elemsOnPage);
-            let start = this.toPage / this.elemsOnPage - 1;
-            let end = this.toPage / this.elemsOnPage + 3;
+            let start = Math.floor(this.toPage / this.elemsOnPage) - 1;
+            let end = Math.floor(this.toPage / this.elemsOnPage) + 3;
             let arr = [];
             for (let i = start; i <= end; i++) {
                 if (i <= allPages && i > 0) {
