@@ -70,7 +70,7 @@
                     >
                         <button
                             class="btn"
-                            :class="[pageNumber == toPage/elemsOnPage+1 ? 'btn-info' : 'btn-secondary']"
+                            :class="[pageNumber == pageElems+1 ? 'btn-info' : 'btn-secondary']"
                             @click="toPage = (elemsOnPage*(pageNumber-1))"
                         >{{pageNumber}}</button>
                     </div>
@@ -170,7 +170,7 @@ export default {
         },
         compCurPage: {
             get() {
-                return Math.floor(this.toPage / this.elemsOnPage) + 1;
+                return this.pageElems + 1;
             },
             set(data) {
                 if (
@@ -193,8 +193,8 @@ export default {
         },
         allowedPages() {
             let allPages = Math.ceil(this.getItems.length / this.elemsOnPage);
-            let start = Math.floor(this.toPage / this.elemsOnPage) - 1;
-            let end = Math.floor(this.toPage / this.elemsOnPage) + 3;
+            let start = this.pageElems - 1;
+            let end = this.pageElems + 3;
             let arr = [];
             for (let i = start; i <= end; i++) {
                 if (i <= allPages && i > 0) {
@@ -202,6 +202,9 @@ export default {
                 }
             }
             return arr;
+        },
+        pageElems() {
+            return Math.floor(this.toPage / this.elemsOnPage);
         }
     }
 };
