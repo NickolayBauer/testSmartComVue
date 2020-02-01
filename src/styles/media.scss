@@ -2,7 +2,13 @@
 
 @media screen and (max-width: 762px) {
 
-    .mobile-sidebar{
+    .pagination {
+        .input-group {
+            display: none;
+        }
+    }
+
+    .mobile-sidebar {
         display: none;
         transition: opacity 0.25s ease;
     }

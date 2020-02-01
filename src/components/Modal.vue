@@ -8,13 +8,13 @@
                 <div class="modal-body">
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
-                            <span class="input-group-text" id="inputGroup">title:</span>
+                            <span class="input-group-text" id="input-modal">title:</span>
                         </div>
                         <input
                             v-model="title"
                             type="text"
                             class="form-control"
-                            aria-describedby="inputGroup"
+                            aria-describedby="input-modal"
                         />
                     </div>
                 </div>

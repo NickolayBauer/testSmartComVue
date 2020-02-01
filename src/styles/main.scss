@@ -142,8 +142,12 @@ body {
     min-height: 40vw;
 }
 
-.toPage {
-    height: 40px;
-    width: 40px;
-    margin: 0 $main-gap*0.25 0 $main-gap*0.25
+
+.pagination {
+    .input-group{
+        width:130px;
+    }
+    .toPage {
+        margin: 0 $main-gap*0.25 0 $main-gap*0.25
+    }
 }

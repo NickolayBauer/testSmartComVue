@@ -41,31 +41,59 @@
                 </tbody>
             </table>
         </div>
-        <div class="col-lg-6 col-md-8 col-12 mx-auto d-flex justify-content-center mt-3 py-1">
-            <div class="d-inline">
-                <button
-                    class="btn btn-primary toPage"
-                    :disabled="!(toPage-elemsOnPage >= 0)"
-                    @click="toPage-=elemsOnPage"
-                >
-                    <i class="fas fa-chevron-left"></i>
-                </button>
+        <div class="d-flex justify-content-center mt-3 py-1 pagination">
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="el-input">el:</span>
+                </div>
+                <input
+                    v-model="compElemsOnPage"
+                    type="number"
+                    class="form-control"
+                    aria-describedby="el-input"
+                />
+            </div>
+            <div class="col-md-6 col-12 d-flex justify-content-center">
+                <div>
+                    <button
+                        class="btn btn-primary toPage"
+                        :disabled="!(toPage-elemsOnPage >= 0)"
+                        @click="toPage-=elemsOnPage"
+                    >
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
 
-                <button
-                    class="btn toPage"
-                    :class="[pageNumber == toPage/elemsOnPage+1 ? 'btn-info' : 'btn-secondary']"
-                    v-for="pageNumber in allowedPages"
-                    :key="pageNumber"
-                    @click="toPage = (elemsOnPage*(pageNumber-1))"
-                >{{pageNumber}}</button>
+                    <div
+                        class="toPage d-inline"
+                        v-for="pageNumber in allowedPages"
+                        :key="pageNumber"
+                    >
+                        <button
+                            class="btn"
+                            :class="[pageNumber == toPage/elemsOnPage+1 ? 'btn-info' : 'btn-secondary']"
+                            @click="toPage = (elemsOnPage*(pageNumber-1))"
+                        >{{pageNumber}}</button>
+                    </div>
 
-                <button
-                    class="btn btn-primary toPage"
-                    :disabled="!(toPage+elemsOnPage < getItems.length)"
-                    @click="toPage+=elemsOnPage"
-                >
-                    <i class="fas fa-chevron-right"></i>
-                </button>
+                    <button
+                        class="btn btn-primary toPage"
+                        :disabled="toPage+elemsOnPage > getItems.length"
+                        @click="toPage+=elemsOnPage"
+                    >
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="page-input">page:</span>
+                </div>
+                <input
+                    v-model="compCurPage"
+                    type="number"
+                    class="form-control"
+                    aria-describedby="page-input"
+                />
             </div>
         </div>
     </div>
@@ -139,6 +167,29 @@ export default {
                 this.toPage * this.numPage,
                 this.toPage + this.elemsOnPage
             );
+        },
+        compCurPage: {
+            get() {
+                return this.toPage / this.elemsOnPage + 1;
+            },
+            set(data) {
+                if (
+                    data > 0 &&
+                    data <= Math.ceil(this.getItems.length / this.elemsOnPage)
+                ) {
+                    this.toPage = (data - 1) * this.elemsOnPage;
+                }
+            }
+        },
+        compElemsOnPage: {
+            get() {
+                return this.elemsOnPage;
+            },
+            set(data) {
+                if (data > 0 && data <= this.getItems.length) {
+                    this.elemsOnPage = data;
+                }
+            }
         },
         allowedPages() {
             let allPages = Math.ceil(this.getItems.length / this.elemsOnPage);
