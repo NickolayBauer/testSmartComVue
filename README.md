@@ -1,18 +1,13 @@
 # testsmartcom
 
-## Json-server setup
+## Project setup
 ```
-npm install -g json-server
+npm i -S
 ```
 
 ## Json-server run
 ```
 json-server --watch db.json
-```
-
-## Project setup
-```
-npm i -S
 ```
 
 ### Compiles and hot-reloads for development
