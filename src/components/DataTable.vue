@@ -80,7 +80,7 @@
 
                     <button
                         class="btn btn-primary toPage"
-                        :disabled="toPage+elemsOnPage > getItems.length"
+                        :disabled="toPage+elemsOnPage >= getItems.length"
                         @click="toPage+=elemsOnPage"
                     >
                         <i class="fas fa-chevron-right"></i>
@@ -118,7 +118,6 @@ export default {
             editableItem: {},
             toPage: 0,
             elemsOnPage: 5,
-            numPage: 1
         };
     },
     mounted() {
@@ -170,7 +169,7 @@ export default {
         },
         pagesOnTable() {
             return this.getItems.slice(
-                this.toPage * this.numPage,
+                this.toPage,
                 this.toPage + this.elemsOnPage
             );
         },
