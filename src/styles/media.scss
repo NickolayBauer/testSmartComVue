@@ -1,5 +1,6 @@
 @import "var";
 
+
 @media screen and (max-width: 762px) {
 
     .pagination {
@@ -19,17 +20,6 @@
         transition: opacity 0.25s ease;
     }
 
-    .content-mask {
-        position: fixed;
-        z-index: 9997;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0, 0, 0, 0.5);
-        display: table;
-        transition: opacity 0.25s ease;
-    }
 
     .left-sidebar {
         position: fixed;
@@ -51,10 +41,18 @@
         width: 60vw;
         min-height: 60vw;
     }
+
+    .content-mask {
+        display: table;
+    }
 }
 
 
 @media screen and (max-width: 320px) {
+    .content-mask {
+        display: table;
+    }
+
     .left-sidebar {
         position: fixed;
         top: 0px;
