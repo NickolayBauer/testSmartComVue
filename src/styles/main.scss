@@ -44,6 +44,7 @@ body {
 .left-sidebar {
     z-index: 9998;
     width: 20%;
+    transition: .25s;
     background-color: $ui-blue;
     position: relative;
 
@@ -65,8 +66,6 @@ body {
                 padding: 0 0 0 $main-gap/2;
             }
         }
-
-
     }
 
     .left-sidebar__menu {

@@ -1,6 +1,5 @@
 @import "var";
 
-
 @media screen and (max-width: 762px) {
 
     .pagination {
@@ -15,18 +14,18 @@
         }
     }
 
-    .mobile-sidebar {
-        display: none;
-        transition: opacity 0.25s ease;
+
+    .left-sidebar.mobile-sidebar {
+        left: 0px;
     }
 
-
     .left-sidebar {
+        width: 60%;
         position: fixed;
         top: 0px;
-        left: 0px;
+        left: -60%;
         height: 100%;
-        width: 60%;
+        transition: .25s;
 
         .left-sidebar__close {
             display: block;
@@ -49,10 +48,6 @@
 
 
 @media screen and (max-width: 320px) {
-    .content-mask {
-        display: table;
-    }
-
     .left-sidebar {
         position: fixed;
         top: 0px;
