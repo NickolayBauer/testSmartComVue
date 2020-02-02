@@ -12,7 +12,15 @@
             <table class="table">
                 <thead>
                     <tr>
-                        <th scope="col">id</th>
+                        <th scope="col" @click="sortMode = !sortMode">
+                            <div class="sortId">
+                                <span>id</span>
+                                <i
+                                    class="fas"
+                                    :class="[sortMode ? 'fa-long-arrow-alt-down': 'fa-long-arrow-alt-up']"
+                                ></i>
+                            </div>
+                        </th>
                         <th scope="col">Date</th>
                         <th scope="col">Title</th>
                         <th scope="col">Action</th>
@@ -118,6 +126,7 @@ export default {
             editableItem: {},
             toPage: 0,
             elemsOnPage: 5,
+            sortMode: true
         };
     },
     mounted() {
@@ -158,9 +167,15 @@ export default {
             this.$store.dispatch("deleteItem", item_id);
         },
         sortById(items) {
-            return items.sort(function(a, b) {
-                return a.id - b.id;
-            });
+            if (this.sortMode === true) {
+                return items.sort(function(a, b) {
+                    return a.id - b.id;
+                });
+            } else if (this.sortMode === false) {
+                return items.sort(function(a, b) {
+                    return b.id - a.id;
+                });
+            }
         }
     },
     computed: {

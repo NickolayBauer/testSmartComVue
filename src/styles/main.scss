@@ -152,3 +152,12 @@ body {
         margin: 0 $main-gap*0.25 0 $main-gap*0.25
     }
 }
+
+.sortId {
+    cursor: pointer;
+    transition: .25s;
+
+    &:hover {
+        color: $ui-dark-blue;
+    }
+}
